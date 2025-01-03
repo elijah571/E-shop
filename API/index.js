@@ -10,15 +10,13 @@ import { dataBase } from "./database/data_base.js";
 //files
 
 dotenv.config();
-
+dataBase()
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 const PORT = process.env.PORT || 3000;
-
-dataBase();
-app.listen(PORT, () => {
-    console.log('app listening on port:', PORT)
+app.listen(PORT, ()=> {
+    console.log('app listen on [port:', PORT)
 })

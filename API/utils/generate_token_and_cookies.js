@@ -2,15 +2,14 @@ import jwt from "jsonwebtoken";
 
 export const generate_token = async (res, id) => {
     const token = await jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '60d'
+        expiresIn: '60d',
     });
 
-    // Set cookies
+    // Set cookie
     res.cookie('token', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',  
+        secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
-        maxAge: 60 * 24 * 60 * 60 * 1000  
+        maxAge: 60 * 24 * 60 * 60 * 1000, // 60 days in milliseconds
     });
-    return;
 };

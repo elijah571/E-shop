@@ -1,11 +1,14 @@
-import React from "react";
+import LayOut from "./pages/Layout/LayOut";
+import { BrowserRouter as Router } from "react-router-dom";
+
+// App.jsx
 
 const App = () => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <Router>
+     <LayOut></LayOut>
+    </Router>
+  );
+};
 
-export default App
+export default App;

@@ -14,9 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Log only once when userLogin changes
     if (userLogin) {
-      console.log("userLogin", userLogin);  // Debugging login state
       navigate("/"); // Redirect to home page after successful login
     }
   }, [userLogin, navigate]);
@@ -30,8 +28,6 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (loading) return;  // Prevent submitting again if loading
-    console.log("userData", userData);  // Check if form data is correct
     dispatch(fetchUserLogin(userData)); // Dispatch login action
   };
 
@@ -45,10 +41,6 @@ const Login = () => {
     }
     return null;
   };
-
-  if (loading) {
-    return <div>Loading...</div>;  // Show loading state while fetching login data
-  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">

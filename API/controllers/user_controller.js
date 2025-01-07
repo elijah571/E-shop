@@ -4,10 +4,13 @@ import { generate_token } from "../utils/generate_token_and_cookies.js";
 
 // Create new user account
 export const signupUser = async (req, res) => {
-    const { userName, email, password } = req.body;
+    const { name, email, password } = req.body;
+
+    // Log received data for debugging
+    console.log('Received data:', req.body);  // Add a log to inspect the request body
 
     try {
-        if (!userName || !email || !password) {
+        if (!name || !email || !password) {
             return res.status(400).json({ message: "All input fields must be filled" });
         }
 
@@ -17,18 +20,18 @@ export const signupUser = async (req, res) => {
         }
 
         const hashedPassword = await bcryptjs.hash(password, 10);
-        const newUser = new User({ userName, email, password: hashedPassword });
+        const newUser = new User({ name, email, password: hashedPassword });
         await newUser.save();
 
-        // Generate token and set cookie
         await generate_token(res, newUser._id);
 
         return res.status(201).json({ message: "User created successfully", user: newUser });
     } catch (error) {
-        console.error("Error creating user:", error);
+        console.error("Error creating user:", error);  // Log any errors
         return res.status(500).json({ message: "Server error, please try again later." });
     }
 };
+
 
 // Login
 export const login = async (req, res) => {
@@ -54,20 +57,23 @@ export const login = async (req, res) => {
 
         return res.status(200).json({
             message: "Login successful",
-            user: { id: user._id }, // Only return minimal user data
+            user
         });
     } catch (error) {
         console.error("Error during login:", error);
         return res.status(500).json({ message: "An error occurred during login" });
     }
 };
-
 // Log out
 export const logOut = async (req, res) => {
     try {
+        // Clear the token cookie by setting it to an empty value and expiring immediately
         res.cookie('token', '', {
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production' ? true : false, 
+            sameSite: 'strict', // Prevent CSRF attacks
             expires: new Date(0), // Expire immediately
+            path: '/', // Ensure the cookie is cleared for the entire domain
         });
 
         return res.status(200).json({ message: "Logged out successfully" });
@@ -76,6 +82,7 @@ export const logOut = async (req, res) => {
         return res.status(500).json({ message: "An error occurred during logout" });
     }
 };
+
 
 // Get all Users
 export const allUsers = async (req, res) => {

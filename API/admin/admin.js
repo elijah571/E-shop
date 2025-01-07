@@ -6,7 +6,7 @@ export const adminUser = async (req, res) => {
     try {
         const users = [
             {
-                userName: "Elijah", 
+                name: "Elijah",  // Changed from userName to name
                 email: "elijahfx43@gmail.com",
                 password: "07010057350Pe*",
                 isAdmin: true
@@ -19,7 +19,7 @@ export const adminUser = async (req, res) => {
         for (const user of users) {
             const hashedPassword = await bcryptjs.hash(user.password, 10); 
             const newUser = new User({
-                userName: user.userName,
+                name: user.name,  // Updated key to name
                 email: user.email,
                 password: hashedPassword,
                 isAdmin: user.isAdmin

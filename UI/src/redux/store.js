@@ -1,12 +1,16 @@
-import loginReducer from "./Users/loginSlice";
-import logoutReducer from "./Users/logOut";
-import signupReducer from "./Users/signupSlice";
+import authReducer from "./features/auth/authSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query/react";
+import { apiSlice } from "./api/apiSlice";
 
-export const store = configureStore({
-  reducer: {
-    login: loginReducer, // Existing login reducer
-    signup: signupReducer, // Existing signup reducer
-    logout: logoutReducer, // Add the logout reducer
-  }
-});
+const store = configureStore({
+    reducer: {
+        [apiSlice.reducerPath]: apiSlice.reducer,
+        auth:  authReducer
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+    devTools: true,
+})
+setupListeners(store.dispatch)
+
+export default store

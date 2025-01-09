@@ -12,15 +12,17 @@ userRoute.post('/login', login);
 userRoute.post('/logout', logOut)
 //create admin
 userRoute.post('/admin', adminUser);
-//get all users as admin
-userRoute.get('/allusers', auth, authAdmin, allUsers); 
+
 // User profile
 userRoute.get('/profile', auth, userProfile);
 //update user Profile
 userRoute.put('/profile', auth, updateUser);
+
 //remove user
-// remove user
+
 userRoute.delete('/profile/:id', auth, authAdmin, removeUser); 
 //Get a user as admin
 userRoute.get('/profile/:id', auth, authAdmin, getAuser); 
 userRoute.put('/profile/:id', auth, authAdmin, updateUserById )
+//get all users as admin
+userRoute.get('/allusers', auth, authAdmin, allUsers); 

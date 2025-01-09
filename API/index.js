@@ -13,16 +13,18 @@ import { userRoute } from "./routes/user_router.js";
 dotenv.config();
 dataBase()
 const app = express();
+// const corsOptions = {
+//   origin: "http://localhost:5173", // Frontend URL
+//   credentials: true, // Allow cookies to be sent
+//   methods: "GET, POST, PUT, DELETE", // Allowed methods
+// };
+
+app.use(cors);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-const corsOptions = {
-    origin: "http://localhost:5173", // Frontend URL
-    credentials: true, // Allow cookies to be sent
-    methods: "GET, POST, PUT, DELETE", // Allowed methods
-  };
-  
-  app.use(cors(corsOptions));
+
+
 // user api end points
 app.use('/api/user', userRoute)
 // products api end points

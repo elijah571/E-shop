@@ -1,8 +1,10 @@
 import "./index.css";
+import AdminRoute from "./Pages/Admin/AdminRoute.jsx";
 import App from "./App.jsx";
 import Login from "./Pages/Users/Login.jsx";
 import Private from "./Components/Private.jsx";
 import Signup from "./Pages/Users/Signup.jsx";
+import UserList from "./Pages/Admin/UserList.jsx";
 import store from "./Redux/store.js";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
@@ -18,7 +20,11 @@ createRoot(document.getElementById('root')).render(
           <Route path="" element={<Private />} >
             
           </Route>
-          {/* Add more nested routes here */}
+          {/* Admin */}
+          <Route path='admin' element={<AdminRoute/>}>
+             
+          </Route>
+          <Route path='users'  element={<UserList/>} />
         </Route>
       </Routes>
     </BrowserRouter>

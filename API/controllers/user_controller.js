@@ -118,12 +118,13 @@ export const userProfile = async (req, res) => {
 export const updateUser = async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
-        user.userName = req.body.userName || user.userName;
+        user.name = req.body.name || user.name;
         user.email = req.body.email || user.email;
-         if (req.body.password) {
-            
-           user.password = req.body.password
-         }
+        if (req.body.password) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(req.body.password, salt);
+        }
+
          
     const userUpdate = await user.save();
     res.status(200).json(userUpdate);
@@ -166,7 +167,7 @@ export const updateUserById = async (req, res) => {
 
         if (user) {
             // Update user fields
-            user.userName = req.body.userName || user.userName;
+            user.name = req.body.name || user.name;
             user.email = req.body.email || user.email;
 
             // Hash the password if it's being updated

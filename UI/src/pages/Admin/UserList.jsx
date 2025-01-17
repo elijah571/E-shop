@@ -27,9 +27,11 @@ const UserList = () => {
   const updateHandler = async (id) => {
     try {
       await updateUser({
-        userId: id,
-        name: editableUserName,
-        email: editableUserEmail
+        id, // Correct usage of id
+        data: {
+          name: editableUserName,
+          email: editableUserEmail,
+        },
       }).unwrap();
       toast.success("User updated successfully");
       setEditableUserId(null);
@@ -51,15 +53,15 @@ const UserList = () => {
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-semibold mb-4 text-center">Users</h1>
+    <div className="pl-10">
+      <h1 className="text-2xl font-semibold mb-4 text-white text-center">Users</h1>
       {isLoading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger" />
       ) : (
-        <div className="overflow-x-auto p-4">
-          <table className="w-full min-w-max bg-white shadow-md rounded-lg">
+        <div className="flex flex-col md:flex-row ">
+          <table className="w-full md:w-4/5 mx-auto bg-white shadow-md rounded-lg">
             <thead className="bg-gray-700 text-white">
               <tr>
                 <th className="px-6 py-3 text-left font-semibold">ID</th>
@@ -83,7 +85,7 @@ const UserList = () => {
                           className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
                         />
                         <button
-                          onClick={updateHandler}
+                          onClick={() => updateHandler(user._id)} // Pass the user ID correctly
                           className="ml-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg"
                         >
                           <FaCheck />
@@ -111,7 +113,7 @@ const UserList = () => {
                           className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
                         />
                         <button
-                          onClick={updateHandler}
+                          onClick={() => updateHandler(user._id)} // Pass the user ID correctly
                           className="ml-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg"
                         >
                           <FaCheck />

@@ -1,6 +1,7 @@
 import "./index.css";
 import AdminRoute from "./Pages/Admin/AdminRoute.jsx";
 import App from "./App.jsx";
+import CategoryList from "./Pages/Admin/CategoryList.jsx";
 import Login from "./Pages/Users/Login.jsx";
 import Private from "./Components/Private.jsx";
 import Signup from "./Pages/Users/Signup.jsx";
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')).render(
              
           </Route>
           <Route path='users'  element={<UserList/>} />
+          <Route path='category' element={<CategoryList/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

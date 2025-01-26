@@ -1,39 +1,40 @@
+import categoryRoutes from "./routes/categoryRoutes.js";
+import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
-import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import orderRoutes from "./routes/orderRoutes.js";
 import path from "path";
-import { dataBase } from "./database/data_base.js";
-import { categoryRouter } from "./routes/category_routes.js";
-import { userRoute } from "./routes/user_router.js";
+import productRoutes from "./routes/productRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
-//PACKAGES
+// packages
 
-//files
+// Utiles
 
 dotenv.config();
-dataBase()
+const port = process.env.PORT || 5000;
+
+connectDB();
+
 const app = express();
 
-const corsOptions = {
-  origin: "http://localhost:5173", // Frontend URL
-  credentials: true, // Allow cookies to be sent
-  methods: "GET, POST, PUT, DELETE", // Allowed methods
-};
-
-app.use(cors(corsOptions));
-app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
+app.use("/api/users", userRoutes);
+app.use("/api/category", categoryRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/upload", uploadRoutes);
+app.use("/api/orders", orderRoutes);
 
-// user api end points
-app.use('/api/user', userRoute)
-//category
-app.use('/api/category', categoryRouter)
-// products api end points
-// order api end points
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, ()=> {
-    console.log('app listen on port:', PORT)
-})
+app.get("/api/config/paypal", (req, res) => {
+  res.send({ clientId: process.env.PAYPAL_CLIENT_ID });
+});
+
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname + "/uploads")));
+
+app.listen(port, () => console.log(`Server running on port: ${port}`));

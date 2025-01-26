@@ -1,18 +1,18 @@
-import "react-toastify/dist/ReactToastify.css";
-import Layout from "./Pages/Layout/Layout";
 import { Outlet } from "react-router-dom";
+import Navigation from "./pages/Auth/Navigation";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
-    <div>
-      <ToastContainer/>
-      <Layout/>
+    <>
+      <ToastContainer />
+      <Navigation />
       <main className="py-3">
-        <Outlet/>
+        <Outlet />
       </main>
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default App
+export default App;

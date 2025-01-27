@@ -1,9 +1,10 @@
-import { useGetTopProductsQuery } from "../../redux/api/productApiSlice";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import Message from "../../components/Message";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import moment from "moment";
+import { useGetTopProductsQuery } from "../../redux/api/productApiSlice";
+
 import {
   FaBox,
   FaClock,
@@ -55,7 +56,7 @@ const ProductCarousel = () => {
                 <img
                   src={image}
                   alt={name}
-                  className="w-full rounded-lg object-cover h-[30rem]"
+                  className="w-full rounded-lg object-contain h-[30rem] "
                 />
 
                 <div className="mt-4 flex justify-between">

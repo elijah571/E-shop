@@ -9,8 +9,9 @@ RUN apt-get update && apt-get install -y \
     lsb-release
 
 # Step 3: Add the MongoDB GPG key and repository
-RUN curl -fsSL https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add - \
-    && echo "deb [arch=amd64] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-6.0.list \
+RUN curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | \
+sudo gpg -o /usr/share/keyrings/mongodb-server-4.4.gpg \
+--dearmor && echo "deb [arch=amd64] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-6.0.list \
     && apt-get update
 
 # Step 4: Install MongoDB

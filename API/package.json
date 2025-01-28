@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "API": "nodemon ./API/index.js",
-    "dev": "nodemon ./API/index.js", 
-    "start": "node ./API/index.js"  
+    "API": "nodemon /API/index.js",
+    "dev": "nodemon /API/index.js", 
+    "start": "node /API/index.js"  
   },
   "keywords": [],
   "author": "",

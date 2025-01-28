@@ -6,16 +6,18 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     wget \
     curl \
-    lsb-release
+    lsb-release \
+    && rm -rf /var/lib/apt/lists/*
 
 # Step 3: Add the MongoDB GPG key and repository
 RUN curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | \
-    sudo gpg -o /usr/share/keyrings/mongodb-server-4.4.gpg \
-    --dearmor && echo "deb [arch=amd64] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-6.0.list \
+    gpg --dearmor -o /usr/share/keyrings/mongodb-server-4.4.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/mongodb-server-4.4.gpg] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-6.0.list \
     && apt-get update
 
 # Step 4: Install MongoDB
-RUN apt-get install -y mongodb-org
+RUN apt-get install -y mongodb-org \
+    && rm -rf /var/lib/apt/lists/*
 
 # Step 5: Set the working directory in the container
 WORKDIR /usr/src/app
@@ -32,5 +34,11 @@ COPY . .
 # Step 9: Expose the necessary ports
 EXPOSE 3000 27017
 
-# Step 10: Start MongoDB and your Node.js app (using a background process for MongoDB)
-CMD ["sh", "-c", "mongod --bind_ip_all & npm start"]
+# Step 10: Create a script to start MongoDB and the Node.js app
+RUN echo '#!/bin/bash\n\
+mongod --bind_ip_all --fork --logpath /var/log/mongodb.log\n\
+npm start' > /usr/src/app/start.sh && \
+    chmod +x /usr/src/app/start.sh
+
+# Step 11: Set the default command to run the script
+CMD ["/usr/src/app/start.sh"]

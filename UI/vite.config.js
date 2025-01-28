@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api/": "https://e-shop-cdhd.onrender.com", 
-      "/uploads/": "http://localhost:5000",
+      "/uploads/": "https://e-shop-cdhd.onrender.com",
     },
   },
 });

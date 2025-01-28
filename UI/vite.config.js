@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/": "http://localhost:5000",
-      "/uploads/": "http://localhost:5000",
+      "/api/": "https://e-shop-cdhd.onrender.com", // Update with your Render backend URL
+      "/uploads/": "https://e-shop-cdhd.onrender.com", // Update with your Render backend URL
     },
   },
 });

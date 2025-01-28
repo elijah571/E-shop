@@ -6,7 +6,8 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    // Make sure the path points to the correct folder inside the API directory
+    cb(null, path.join(__dirname, "uploads"));
   },
 
   filename: (req, file, cb) => {
@@ -37,9 +38,10 @@ router.post("/", (req, res) => {
     if (err) {
       res.status(400).send({ message: err.message });
     } else if (req.file) {
+      // Ensure the returned image path is correct with the 'uploads' folder inside API
       res.status(200).send({
         message: "Image uploaded successfully",
-        image: `/${req.file.path}`,
+        image: `/uploads/${req.file.filename}`,
       });
     } else {
       res.status(400).send({ message: "No image file provided" });
@@ -48,5 +50,3 @@ router.post("/", (req, res) => {
 });
 
 export default router;
-
-

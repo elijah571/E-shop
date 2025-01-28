@@ -1,20 +1,20 @@
-# Step 1: Use the official Node.js image as a base
+# Use a Node.js base image
 FROM node:18
 
-# Step 2: Set the working directory in the container
-WORKDIR /usr/src/app
+# Set the working directory to the 'API' folder
+WORKDIR /usr/src/app/API
 
-# Step 3: Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy the package.json and package-lock.json files
+COPY API/package*.json ./
 
-# Step 4: Install the app dependencies
+# Install dependencies
 RUN npm install
 
-# Step 5: Copy the rest of the application files
-COPY . .
+# Copy the rest of the application files
+COPY API ./
 
-# Step 6: Expose the necessary ports
+# Expose port if necessary (adjust the port if you're using a different one)
 EXPOSE 3000
 
-# Step 7: Start the Node.js app
+# Start the application
 CMD ["npm", "start"]

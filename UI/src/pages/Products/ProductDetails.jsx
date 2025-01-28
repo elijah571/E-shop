@@ -1,13 +1,19 @@
+import HeartIcon from "./HeartIcon";
+import Loader from "../../components/Loader";
+import Message from "../../components/Message";
+import ProductTabs from "./ProductTabs";
+import Ratings from "./Ratings";
+import moment from "moment";
 import { useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { addToCart } from "../../redux/features/cart/cartSlice";
+
 import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
 } from "../../redux/api/productApiSlice";
-import Loader from "../../components/Loader";
-import Message from "../../components/Message";
 import {
   FaBox,
   FaClock,
@@ -15,11 +21,6 @@ import {
   FaStar,
   FaStore,
 } from "react-icons/fa";
-import moment from "moment";
-import HeartIcon from "./HeartIcon";
-import Ratings from "./Ratings";
-import ProductTabs from "./ProductTabs";
-import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -65,7 +66,7 @@ const ProductDetails = () => {
 
   return (
     <>
-      <div>
+      <div className="mt-28">
         <Link
           to="/"
           className="text-white font-semibold hover:underline ml-[10rem]"

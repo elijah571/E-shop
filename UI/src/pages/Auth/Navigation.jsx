@@ -1,4 +1,4 @@
-import "./Navigation.css";
+import AdminMenu from "../Admin/AdminMenu";
 import FavoritesCount from "../Products/FavoritesCount";
 import { useState } from "react";
 import { BiMenu } from "react-icons/bi";
@@ -117,48 +117,55 @@ const Navigation = () => {
         </button>
 
         {dropdownOpen && userInfo && (
-          <ul className="absolute right-0 mt-2 bg-white text-gray-600 z-[1000]">
-            {userInfo.isAdmin && (
-              <>
-                <li>
-                  <Link to="/admin/dashboard" className="block px-4 py-2 hover:bg-gray-100">
-                    Dashboard
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/admin/productlist" className="block px-4 py-2 hover:bg-gray-100">
-                    Products
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/admin/categorylist" className="block px-4 py-2 hover:bg-gray-100">
-                    Category
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/admin/orderlist" className="block px-4 py-2 hover:bg-gray-100">
-                    Orders
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/admin/userlist" className="block px-4 py-2 hover:bg-gray-100">
-                    Users
-                  </Link>
-                </li>
-              </>
-            )}
+          <div className="absolute right-0 mt-2 flex bg-white text-gray-600 z-[1000]">
+            {/* Admin Menu and Dropdown Options */}
+            <div className="flex flex-col gap-2 mr-4">
+              
+            </div>
 
-            <li>
-              <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
-                Profile
-              </Link>
-            </li>
-            <li>
-              <button onClick={logoutHandler} className="block w-full px-4 py-2 text-left hover:bg-gray-100">
-                Logout
-              </button>
-            </li>
-          </ul>
+            <ul className="flex flex-col">
+              {userInfo.isAdmin && (
+                <> <AdminMenu />
+                  <li>
+                    <Link to="/admin/dashboard" className="block px-4 py-2 hover:bg-gray-100">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/productlist" className="block px-4 py-2 hover:bg-gray-100">
+                      Products
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/categorylist" className="block px-4 py-2 hover:bg-gray-100">
+                      Category
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/orderlist" className="block px-4 py-2 hover:bg-gray-100">
+                      Orders
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/userlist" className="block px-4 py-2 hover:bg-gray-100">
+                      Users
+                    </Link>
+                  </li>
+                </>
+              )}
+
+              <li>
+                <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <button onClick={logoutHandler} className="block w-full px-4 py-2 text-left hover:bg-gray-100">
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
         )}
 
         {!userInfo && (

@@ -1,5 +1,5 @@
-import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import Message from "../../components/Message";
 import { Link } from "react-router-dom";
 import { useGetMyOrdersQuery } from "../../redux/api/orderApiSlice";
 
@@ -7,7 +7,7 @@ const UserOrder = () => {
   const { data: orders, isLoading, error } = useGetMyOrdersQuery();
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto mt32">
       <h2 className="text-2xl font-semibold mb-4">My Orders </h2>
 
       {isLoading ? (

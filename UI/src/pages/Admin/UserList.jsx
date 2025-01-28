@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
-import { FaTrash, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
-import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import Message from "../../components/Message";
+import { useEffect, useState } from "react";
+import { FaCheck, FaEdit, FaTimes, FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
+
 import {
   useDeleteUserMutation,
   useGetUsersQuery,
   useUpdateUserMutation,
 } from "../../redux/api/usersApiSlice";
-import { toast } from "react-toastify";
 // ⚠️⚠️⚠️ don't forget this ⚠️⚠️⚠️⚠️
 // import AdminMenu from "./AdminMenu";
 
@@ -58,7 +59,7 @@ const UserList = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 mt-20">
       <h1 className="text-2xl font-semibold mb-4">Users</h1>
       {isLoading ? (
         <Loader />

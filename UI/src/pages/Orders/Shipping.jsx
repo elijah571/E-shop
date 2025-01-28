@@ -1,11 +1,12 @@
+import ProgressSteps from "../../components/ProgressSteps";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import {
   saveShippingAddress,
   savePaymentMethod,
 } from "../../redux/features/cart/cartSlice";
-import ProgressSteps from "../../components/ProgressSteps";
 
 const Shipping = () => {
   const cart = useSelector((state) => state.cart);
@@ -38,7 +39,7 @@ const Shipping = () => {
   }, [navigate, shippingAddress]);
 
   return (
-    <div className="container mx-auto mt-10">
+    <div className="container mx-auto">
       <ProgressSteps step1 step2 />
       <div className="mt-[10rem] flex justify-around items-center flex-wrap">
         <form onSubmit={submitHandler} className="w-[40rem]">

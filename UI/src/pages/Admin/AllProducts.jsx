@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import moment from "moment";
+import { Link } from "react-router-dom";
 import { useAllProductsQuery } from "../../redux/api/productApiSlice";
-import AdminMenu from "./AdminMenu";
 
 const AllProducts = () => {
   const { data: products, isLoading, isError } = useAllProductsQuery();
@@ -16,7 +15,7 @@ const AllProducts = () => {
 
   return (
     <>
-      <div className="container mx-[9rem]">
+      <div className="container mx-[9rem] mt-20">
         <div className="flex flex-col  md:flex-row">
           <div className="p-3">
             <div className="ml-[2rem] text-xl font-bold h-12">
@@ -81,7 +80,7 @@ const AllProducts = () => {
             </div>
           </div>
           <div className="md:w-1/4 p-3 mt-2">
-            <AdminMenu />
+       
           </div>
         </div>
       </div>

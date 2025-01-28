@@ -1,10 +1,11 @@
-import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import Messsage from "../../components/Message";
 import Loader from "../../components/Loader";
+import Messsage from "../../components/Message";
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import {
   useDeliverOrderMutation,
   useGetOrderDetailsQuery,
@@ -92,7 +93,7 @@ const Order = () => {
   ) : error ? (
     <Messsage variant="danger">{error.data.message}</Messsage>
   ) : (
-    <div className="container flex flex-col ml-[10rem] md:flex-row">
+    <div className="container flex flex-col md:flex-row mt-20">
       <div className="md:w-2/3 pr-4">
         <div className="border gray-300 mt-5 pb-4 mb-5">
           {order.orderItems.length === 0 ? (

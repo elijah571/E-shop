@@ -82,14 +82,14 @@ const Shop = () => {
 
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container mx-auto mt-28">
         <div className="flex md:flex-row">
           <div className="bg-[#151515] p-3 mt-2 mb-2">
             <h2 className="h4 text-center py-2 bg-black rounded-full mb-2">
               Filter by Categories
             </h2>
 
-            <div className="p-5 w-[15rem]">
+            <div className="p-5 w-[10rem]">
               {categories?.map((c) => (
                 <div key={c._id} className="mb-2">
                   <div className="flex ietms-center mr-4">

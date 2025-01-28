@@ -1,4 +1,3 @@
-import AdminMenu from "./AdminMenu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -68,9 +67,8 @@ const ProductList = () => {
   };
 
   return (
-    <div className="container  sm:mx-[2rem] ">
+    <div className="container  sm:mx-[2rem] mt-20">
       <div className="flex flex-col md:flex-row items-center justify-center w-full ">
-        <AdminMenu />
         <div className="md:w-3/4 p-5">
           <h1 className="text-2xl font-bold mb-5">Create Product</h1>
 

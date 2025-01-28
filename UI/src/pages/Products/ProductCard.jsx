@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import HeartIcon from "./HeartIcon";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/features/cart/cartSlice";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import HeartIcon from "./HeartIcon";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const ProductCard = ({ p }) => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const ProductCard = ({ p }) => {
             className="cursor-pointer w-full"
             src={p.image}
             alt={p.name}
-            style={{ height: "170px", objectFit: "cover" }}
+            style={{ height: "200px", objectFit: "contain" }}
           />
         </Link>
         <HeartIcon product={p} />

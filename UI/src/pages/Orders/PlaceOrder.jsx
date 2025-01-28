@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import ProgressSteps from "../../components/ProgressSteps";
-import Loader from "../../components/Loader";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useCreateOrderMutation } from "../../redux/api/orderApiSlice";
 import { clearCartItems } from "../../redux/features/cart/cartSlice";
 
@@ -45,7 +45,7 @@ const PlaceOrder = () => {
     <>
       <ProgressSteps step1 step2 step3 />
 
-      <div className="container mx-auto mt-8">
+      <div className="container mx-auto mt-20">
         {cart.cartItems.length === 0 ? (
           <Message>Your cart is empty</Message>
         ) : (

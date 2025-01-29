@@ -22,8 +22,8 @@ FROM nginx:stable-alpine AS production
 # Copy the build output from the builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Expose port 80 to serve the application
-EXPOSE 80
+# Expose port 3000 to serve the application
+EXPOSE 3000
 
 # Start NGINX
 CMD ["nginx", "-g", "daemon off;"]

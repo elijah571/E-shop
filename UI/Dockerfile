@@ -23,7 +23,7 @@ FROM nginx:stable-alpine AS production
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Expose port 3000 to serve the application
-EXPOSE 3000
+EXPOSE 80
 
 # Start NGINX
 CMD ["nginx", "-g", "daemon off;"]

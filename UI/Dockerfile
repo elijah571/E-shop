@@ -4,17 +4,17 @@ FROM node:18 AS builder
 # Set working directory inside the container
 WORKDIR /app
 
-# Copy package.json and yarn.lock to install dependencies
-COPY package.json yarn.lock ./
+# Copy package.json and package-lock.json to install dependencies
+COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN yarn install
+RUN npm install
 
 # Copy the rest of the application files
 COPY . .
 
 # Build the Vite app
-RUN yarn build
+RUN npm run build
 
 # Step 2: Use a lightweight server to serve the production build
 FROM nginx:stable-alpine AS production
@@ -22,7 +22,7 @@ FROM nginx:stable-alpine AS production
 # Copy the build output from the builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Expose port 3000 to serve the application
+# Expose port 80 to serve the application (default for NGINX)
 EXPOSE 80
 
 # Start NGINX
